@@ -1,0 +1,26 @@
+.scenario-link {
+	text-decoration: none;
+	transition: all .3s ease;
+}
+
+.scenario-link .scenario:hover {
+	box-shadow: 3px 3px 3px #424242;
+}
+
+.scenario {
+	width: 800px;
+	margin: 30px auto;
+	border: 1px solid #efefef;
+	padding: 10px;
+	overflow: hidden;
+	transition: all .3s ease;
+}
+
+
+.scenario img {
+	float: left;
+	width: 200px;
+	height: auto;
+	padding: 15px;
+	direction: block;
+}

@@ -55,43 +55,7 @@ function dlinq_ai_scenario_list($atts){
       return $html;
    }                    
 
-function rephraseForAIInstructions($prompt) {
-    // Replace simple pronoun-based statements
-    $replacements = [
-        '/\bYour name is\b/i' => 'Set the AI\'s name to',
-        '/\bYou are\b/i' => 'The AI is',
-        '/\bYou work\b/i' => 'The AI works',
-        '/\bYou should\b/i' => 'The AI should',
-        '/\bYou will\b/i' => 'The AI will',
-        '/\bI am\b/i' => 'The user is',
-        '/\bme\b/i' => 'the user',
-        '/\bmy\b/i' => 'the user\'s'
-    ];
 
-    foreach ($replacements as $pattern => $replacement) {
-        $prompt = preg_replace($pattern, $replacement, $prompt);
-    }
-
-    // Handle "your [word]" -> "the AI's [pluralized word]"
-    $prompt = preg_replace_callback('/\byour (\w+)/i', function ($matches) {
-        $plural = pluralize($matches[1]);
-        return "the AI's $plural";
-    }, $prompt);
-
-    // Handle "you [verb] a [noun]" -> "the AI [verb] [plural noun]"
-    $prompt = preg_replace_callback('/\byou (\w+)\s+a[n]?\s+(\w+)/i', function ($matches) {
-        $verb = $matches[1];
-        $noun = pluralize($matches[2]);
-        return "the AI $verb $noun";
-    }, $prompt);
-
-    return $prompt;
-}
-
-// Example usage
-$originalPrompt = "Your name is Frau Neumann and you work at the job agency 'Agentur für Arbeit' in Berlin. I am visiting to discuss future job options. You should ask a lot of questions about my strength, weakness, interest, and degree. Start the conversation with 'Willkommen. Wie kann ich Ihnen heute helfen?'";
-
-echo rephraseForAIInstructions($originalPrompt);
 
 
 add_action('wp_enqueue_scripts', 'dlinq_ai_scenario_load_scripts');
